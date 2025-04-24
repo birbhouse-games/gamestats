@@ -6,7 +6,7 @@ on:
     workflows:
       - Test
     branches:
-      - beta
+      - next
       - main
     types:
       - completed
