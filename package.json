@@ -1,6 +1,6 @@
 {
-  "name": "gamestats.js",
-  "version": "1.0.7",
+  "name": "@birbhouse-games/gamestats.js",
+  "version": "0.0.0-development",
   "description": "Javascript performance monitor / game stats library inspired by Unity's graphy",
   "type": "module",
   "main": "build/gamestats.cjs",
@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ErikSom/gamestats.git"
+    "url": "git+https://github.com/birbhouse-games/gamestats.git"
   },
   "keywords": [
     "game",
@@ -42,12 +42,15 @@
     "performance",
     "fps"
   ],
-  "author": "Erik Sombroek",
+  "author": "Trezy <t@trezy.com> (https://trezy.codes)",
+  "contributors": [
+    "Erik Sombroek"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ErikSom/gamestats/issues"
+    "url": "https://github.com/birbhouse-games/gamestats/issues"
   },
-  "homepage": "https://github.com/ErikSom/gamestats#readme",
+  "homepage": "https://github.com/birbhouse-games/gamestats#readme",
   "devDependencies": {
     "concurrently": "^9.1.2",
     "esbuild": "^0.25.3",

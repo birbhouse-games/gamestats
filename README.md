@@ -1,65 +1,78 @@
+# `@birbhouse-games/gamestats`
 
-[![npm version](https://badge.fury.io/js/gamestats.js.svg)](https://badge.fury.io/js/gamestats.js) Follow me on Twitter:[![Eriks Twitter][1.1]][1]
+> **Track performance stats in your game.**
 
-[1.1]: https://i.imgur.com/tXSoThF.png
+[![Version][version-badge]][package]
+[![BSD-3-Clause License][license-badge]][license]
+[![Downloads][downloads-badge]][npmtrends]
+[![Bundle size][bundlephobia-badge]][bundlephobia]
 
-[1]: https://www.twitter.com/ErikSombroek
-# gamestats.js
+<!-- [![Code Coverage][coveralls-badge]][coveralls] -->
+
+[![Build status][build-status-badge]][build-status]
+[![Dependencies][libraries.io-badge]][libraries.io]
+[![Maintainability][codeclimate-badge]][codeclimate]
+[![Code of Conduct][code-of-conduct-badge]][code-of-conduct]
+<!-- [![PRs Welcome][prs-badge]][prs] -->
+
+[![Watch on GitHub][github-watch-badge]][github-watch]
+[![Star on GitHub][github-star-badge]][github-star]
 
 ## Example
 ![Image of Gamestats](https://i.imgur.com/nCMwblD.gif)
 
-For a live example click [here](https://eriksom.github.io/gamestats/example/)
+For a live example click [here](https://birbhouse-games.github.io/gamestats/example/)
 
 **Features**
 - FPS counter, shows the average / min / max for the visible history
 - MS milliseconds that where needed to render the last frame
 - Memory usage maximum (reserved) and allocated memory for the context (*Chrome only*)
 - Custom graphs
-- Extensions (e.g. VRAM stats for PIXI)
 
 ## Installation
 
 With [npm](https://npmjs.org) do:
 
 ```bash
-npm install gamestats.js
+npm install @birbhouse-games/gamestats
 ```
 
 ## Usage
 
 ```js
-var stats = new GameStats();
-document.body.appendChild( stats.dom );
+import { GameStats } from '@birbhouse-games/gamestats'
+
+const stats = new GameStats()
+
+document.body.appendChild( stats.dom )
 
 function animate() {
-
-	stats.begin();
+	stats.begin()
 	// game update goes here
 
-	stats.begin('physics');
+	stats.begin('physics')
 	// the graph will deterministically assign a color based on the label
-	physics();
+	physics()
 	stats.end('physics')
 
 	stats.begin('render', '#6cc644')
 	// optional second color parameter
-	render();
+	render()
 	stats.end('render')
 
-	stats.end();
+	stats.end()
 
-	requestAnimationFrame( animate );
-
+	requestAnimationFrame( animate )
 }
 
-requestAnimationFrame( animate );
+requestAnimationFrame( animate )
 ```
-See also this code [example](https://github.com/ErikSom/gamestats/blob/main/example/index.html)
+See also this code [example](https://github.com/birbhouse-games/gamestats/blob/main/example/index.html)
 
-**Optional configurations**
+**Optional configuration**
+
 ```js
-var config = {
+const config = {
 	autoPlace:true, /* auto place in the dom */
 	targetFPS: 60, /* the target max FPS */
 	redrawInterval: 50, /* the interval in MS for redrawing the FPS graph */
@@ -76,50 +89,16 @@ var config = {
 	COLOR_TEXT_TO_LOW: '#eee207',
 	COLOR_TEXT_BAD: '#d34646',
 	COLOR_TEXT_TARGET: '#d249dd',
-	COLOR_BG:'#333333',
+	COLOR_BG: '#333333',
 }
 
-var stats = new GameStats(config);
-```
-# Extensions
-
-It's easy to add extensions to GameStats. To enable an extension use:
-```js
-var stats = new GameStats();
-stats.enableExtension(<name>, [<extension properties>])
+const stats = new GameStats(config);
 ```
 
-** Make sure to put the extension module (e.g. gamestats-pixi.module.js) next to your source file**
-
-## Pixi Integration
-GameStats supports integration directly with PIXI to display VRAM usage and other helpful information:
-
-![Image of PIXI integration](https://i.imgur.com/vTFi4ua.gif)
-
-For a live example click [here](https://eriksom.github.io/gamestats/example/pixi)
-
-```js
-var stats = new GameStats();
-document.body.appendChild( stats.dom );
-
-// enableExtension(<name>, [<reference to PIXI>, <reference to your pixi app>, <options *optional>);
-stats.enableExtension('pixi', [PIXI, app]);
-
-// OR addtionally with options
-const options = {
-	maxMemorySize: 350, // GPU VRAM limit ( the max of the texture memory graph )
-	COLOR_MEM_TEXTURE: '#8ddcff', // the display color of the texture memory size in the graph
-	COLOR_MEM_BUFFER: '#ffd34d', // the display color of buffer memory size in the graph
-}
-stats.enableExtension('pixi', [PIXI, app, options]);
-
-```
-See also this code [example](https://github.com/ErikSom/gamestats/blob/main/example/pixi.html)
-
-## Inspiration
-[Stats.js](https://github.com/mrdoob/stats.js) (mr doob)
-
-[Unity Graphy](https://github.com/Tayx94/graphy) (tayx94)
+## Prior Art
+* [gamestats.js](https://github.com/ErikSom/gamestats) was originally written by [ErikSom](https://github.com/ErikSom)
+* [Stats.js](https://github.com/mrdoob/stats.js) by mr doob
+* [Unity Graphy](https://github.com/Tayx94/graphy) by tayx94
 
 ## License
 
@@ -144,3 +123,33 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+
+
+
+
+[bundlephobia]: https://bundlephobia.com/result?p=@birbhouse-games/gamestats
+[bundlephobia-badge]: https://img.shields.io/bundlephobia/minzip/@birbhouse-games/gamestats.svg?style=flat-square
+[build-status]: https://github.com/birbhouse-games/gamestats/actions
+[build-status-badge]: https://img.shields.io/github/actions/workflow/status/birbhouse-games/gamestats/release.yml?style=flat-square
+[code-of-conduct]: CODE_OF_CONDUCT.md
+[code-of-conduct-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
+[codeclimate]: https://codeclimate.com/github/birbhouse-games/gamestats
+[codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/birbhouse-games/gamestats.svg?style=flat-square
+[coveralls]: https://coveralls.io/github/birbhouse-games/gamestats
+[coveralls-badge]: https://img.shields.io/coveralls/birbhouse-games/gamestats.svg?style=flat-square
+[downloads-badge]: https://img.shields.io/npm/dm/@birbhouse-games/gamestats.svg?style=flat-square
+[github-watch]: https://github.com/birbhouse-games/gamestats/watchers
+[github-watch-badge]: https://img.shields.io/github/watchers/birbhouse-games/gamestats.svg?style=social
+[github-star]: https://github.com/birbhouse-games/gamestats/stargazers
+[github-star-badge]: https://img.shields.io/github/stars/birbhouse-games/gamestats.svg?style=social
+[libraries.io]: https://libraries.io/npm/@birbhouse-games/gamestats
+[libraries.io-badge]: https://img.shields.io/librariesio/release/npm/@birbhouse-games/gamestats.svg?style=flat-square
+[license]: LICENSE
+[license-badge]: https://img.shields.io/npm/l/@birbhouse-games/gamestats.svg?style=flat-square
+[npmtrends]: https://www.npmtrends.com/@birbhouse-games/gamestats
+[package]: https://npmjs.com/package/@birbhouse-games/gamestats
+[prs]: CONTRIBUTING.md
+[prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
+[version-badge]: https://img.shields.io/npm/v/@birbhouse-games/gamestats.svg?style=flat-square
