@@ -1,4 +1,5 @@
 // Local imports
+import { ExtensionName } from './typedefs/ExtensionName'
 import { getMMA } from './helpers/getMMA'
 import { IExtension } from './typedefs/IExtension'
 import { IGameStatsOptions } from './typedefs/IGameStatsOptions'
@@ -17,6 +18,10 @@ const TOMB = 1048576
 
 
 
+/**
+ * Instances of the GameStats class manage panels that display the current
+ * rendering performance of an application.
+ */
 export class GameStats {
 	/****************************************************************************\
 	 * Private instance properties
@@ -36,7 +41,7 @@ export class GameStats {
 
 		// COLORS
 		FONT_FAMILY: 'Arial',
-		COLOR_BG:'#333333',
+		COLOR_BG: '#333333',
 		COLOR_FPS_AVG: '#FFF',
 		COLOR_FPS_BAR: '#34cfa2',
 		COLOR_TEXT_BAD: '#d34646',
@@ -57,7 +62,7 @@ export class GameStats {
 	#previousAverageMS?: number
 	#previousMaxMS?: number
 	#prevTime?: number
-	#shown = true
+	#isVisible = true
 
 
 
@@ -77,8 +82,14 @@ export class GameStats {
 	 * Constructor
 	\****************************************************************************/
 
+	/**
+	 * Creates a new GameStats instance.
+	 *
+	 * @param options Optional configuration for the instance.
+	 */
 	constructor(options: Partial<IGameStatsOptions> = {}) {
 		Object.assign(this.#config, options)
+		Object.freeze(this.#config)
 
 		this.#baseCanvasWidth = 100 * this.#config.scale
 		this.#baseCanvasHeight = 150 * this.#config.scale
@@ -99,14 +110,30 @@ export class GameStats {
 			width: this.#baseCanvasWidth,
 			height: this.#baseCanvasHeight * 0.2,
 			drawY: this.#baseCanvasHeight * 0.76,
-			barWidth: this.#baseCanvasWidth / this.#config.memoryMaxHistory
+			barWidth: this.#baseCanvasWidth / this.#config.memoryMaxHistory,
 		}
 
 		this.#canvas = document.createElement('canvas')
 		this.#ctx = this.#canvas.getContext('2d', { willReadFrequently: true })!
 		this.dom = document.createElement('div')
 
-		this.#init()
+		this.#canvas.width = this.#baseCanvasWidth
+		this.#canvas.height = this.#baseCanvasHeight
+		this.#canvas.style.cssText = `width:${this.#baseCanvasWidth}px; height:${this.#baseCanvasHeight}px; background-color:${this.#config.COLOR_BG}`
+
+		this.dom.appendChild(this.#canvas)
+		this.dom.setAttribute('data', 'gamestats')
+		this.dom.style.cssText = 'position: fixed; left: 0; top: 0; display: flex; flex-direction: column; gap: 5px;'
+
+		if (this.#config.autoPlace) {
+			document.body.appendChild(this.dom)
+		}
+
+		if (performance && 'memory' in performance) {
+			this.#labels['memory'] = []
+		}
+
+		this.#update()
 	}
 
 
@@ -117,6 +144,7 @@ export class GameStats {
 	 * Private instance methods
 	\****************************************************************************/
 
+	/** Draws the performance panel. */
 	#draw() {
 		if (!this.#prevTime) {
 			return
@@ -140,7 +168,7 @@ export class GameStats {
 		this.#drawFPS()
 		this.#graphYOffset = 0
 
-		for (let label of this.#labelOrder) {
+		for (const label of this.#labelOrder) {
 			this.#drawGraph(label, this.#previousMaxMS, true)
 		}
 
@@ -151,6 +179,7 @@ export class GameStats {
 		}
 	}
 
+	/** Draws the FPS meter. */
 	#drawFPS() {
 		const ctx = this.#ctx
 		const config = this.#config
@@ -223,7 +252,7 @@ export class GameStats {
 		}
 		ctx.fillText(`${averageFPS}`, avgMinMaxOffsetX - padding, avgMinMaxOffsetY + padding)
 
-		ctx.fillStyle = config.COLOR_FPS_BAR;
+		ctx.fillStyle = config.COLOR_FPS_BAR
 		if (minFPS < badFPS) {
 			ctx.fillStyle = config.COLOR_TEXT_BAD
 		} else if (minFPS < toLowFPS) {
@@ -240,13 +269,19 @@ export class GameStats {
 		ctx.fillText(`${maxFPS}`, avgMinMaxOffsetX * 3.3 - padding * 3, avgMinMaxOffsetY + padding)
 	}
 
+	/**
+	 * Draws a graph.
+	 *
+	 * @param label The graph label.
+	 * @param minMaxValue The lowest bounds of the graph's maximum value.
+	 * @param doYOffsets Whether to respect y offsets.
+	 */
 	#drawGraph(label: string, minMaxValue?: number, doYOffsets?: boolean) {
 		const labelMeasures = this.#labels[label]
 
-		let {
-			average,
-			max,
-		} = getMMA(labelMeasures)
+		const mma = getMMA(labelMeasures)
+		const { average } = mma
+		let { max } = mma
 
 		max = Math.max(average * 1.5, max)
 
@@ -265,11 +300,11 @@ export class GameStats {
 			yOffset += this.#graphYOffset
 		}
 
-		let x = config.maximumHistory * this.#msGraph.barWidth - this.#msGraph.barWidth
-		let y = this.#msGraph.drawY
-		let w = this.#msGraph.barWidth
-		let h = (measure / max) * this.#msGraph.height
+		const x = config.maximumHistory * this.#msGraph.barWidth - this.#msGraph.barWidth
+		const w = this.#msGraph.barWidth
+		const h = (measure / max) * this.#msGraph.height
 
+		let y = this.#msGraph.drawY
 		y += (this.#msGraph.height - h) - yOffset
 
 		ctx.globalAlpha = 0.5
@@ -289,6 +324,7 @@ export class GameStats {
 		}
 	}
 
+	/** Draws the lines for the millisecond graph. */
 	#drawLines() {
 		const config = this.#config
 		const ctx = this.#ctx
@@ -318,6 +354,7 @@ export class GameStats {
 		ctx.fillRect(this.#msGraph.width - this.#msGraph.barWidth, targetY, this.#msGraph.barWidth, this.#msGraph.barWidth)
 	}
 
+	/** Draws the memory graph. */
 	#drawMemory() {
 		const config = this.#config
 		const ctx = this.#ctx
@@ -331,8 +368,8 @@ export class GameStats {
 		const memoryTextY = this.#baseCanvasHeight * 0.60
 
 		// avg min max
+		const fontSize = this.#baseCanvasWidth * 0.09
 		ctx.textAlign = 'left'
-		let fontSize = this.#baseCanvasWidth * 0.09
 		ctx.font = `${fontSize}px ${config.FONT_FAMILY}`
 		ctx.textBaseline = 'top'
 		ctx.fillStyle = config.COLOR_TEXT_LABEL
@@ -364,10 +401,11 @@ export class GameStats {
 		const memoryMeasures = this.#labels['memory']
 		const lastValue = memoryMeasures[memoryMeasures.length - 1]
 
-		let x = this.#memoryGraph.width - this.#memoryGraph.barWidth * 6
+		const x = this.#memoryGraph.width - this.#memoryGraph.barWidth * 6
+		const w = this.#memoryGraph.barWidth * 6
+		const h = (lastValue / targetMemory) * this.#memoryGraph.height
+
 		let y = this.#memoryGraph.drawY
-		let w = this.#memoryGraph.barWidth * 6
-		let h = (lastValue / targetMemory) * this.#memoryGraph.height
 		y += (this.#memoryGraph.height - h)
 
 		ctx.globalAlpha = 0.5
@@ -396,29 +434,10 @@ export class GameStats {
 		ctx.fillRect(this.#memoryGraph.width - this.#memoryGraph.barWidth * 6, targetY, this.#memoryGraph.barWidth * 6, this.#memoryGraph.barWidth * 6)
 	}
 
-	#init() {
-		this.#canvas.width = this.#baseCanvasWidth
-		this.#canvas.height = this.#baseCanvasHeight
-		this.#canvas.style.cssText = `width:${this.#baseCanvasWidth}px; height:${this.#baseCanvasHeight}px; background-color:${this.#config.COLOR_BG}`
-
-		this.dom.appendChild(this.#canvas)
-		this.dom.setAttribute('data', 'gamestats')
-		this.dom.style.cssText = `position: fixed; left: 0; top: 0; display: flex; flex-direction: column; gap: 5px;`
-
-		if (this.#config.autoPlace) {
-			document.body.appendChild(this.dom)
-		}
-
-		if (performance && 'memory' in performance) {
-			this.#labels['memory'] = []
-		}
-
-		this.#update()
-	}
-
+	/** Updates the performance panel. */
 	#update() {
-		// don't draw if we are not #shown
-		if (this.#shown) {
+		// don't draw if we are not #isVisible
+		if (this.#isVisible) {
 			this.#draw()
 		}
 
@@ -509,18 +528,23 @@ export class GameStats {
 		}
 	}
 
-	async enableExtension(name: string, params: Array<unknown>) {
-		if (this.#extensions[name]) {
-			return null
+	/**
+	 * Enables an extension for the performance panel.
+	 *
+	 * @param extensionName The name of the extension.
+	 * @param params Parameters to be passed to the extension.
+	 */
+	async enableExtension(extensionName: ExtensionName, params: Array<unknown>) {
+		if (this.#extensions[extensionName]) {
+			return
 		}
 
 		try {
-			const module = await import(`./gamestats-${name}.module.js`)
+			const module = await import(`./gamestats-${extensionName}.module.js`)
 			const extension = new module.default(this, ...params)
-			this.#extensions[name] = extension
+			this.#extensions[extensionName] = extension
 		} catch (error) {
 			console.log(error)
-			return null
 		}
 	}
 
@@ -551,7 +575,25 @@ export class GameStats {
 	 * @param isVisible Whether the performance panel will be visible.
 	 */
 	show(isVisible: boolean) {
-		this.#shown = isVisible
+		this.#isVisible = isVisible
 		this.dom.style.display = isVisible ? 'flex' : 'none'
+	}
+
+
+
+
+
+	/****************************************************************************\
+	 * Public instance getters
+	\****************************************************************************/
+
+	/** @returns The performance panel configuration. */
+	get config() {
+		return this.#config
+	}
+
+	/** @returns Whether the performance panel is currently shown. */
+	get isVisible() {
+		return this.#isVisible
 	}
 }

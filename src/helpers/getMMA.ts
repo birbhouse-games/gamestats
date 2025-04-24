@@ -9,7 +9,7 @@ export function getMMA(measures: Array<number>) {
 	let max = -Number.POSITIVE_INFINITY
 	let average = 0
 
-	for (let measure of measures) {
+	for (const measure of measures) {
 		if (measure < min) {
 			min = measure
 		}
