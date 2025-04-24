@@ -1,4 +1,4 @@
-# `@birbhouse-games/gamestats`
+# `@birbhouse/gamestats`
 
 > **Track performance stats in your game.**
 
@@ -34,13 +34,13 @@ For a live example click [here](https://birbhouse-games.github.io/gamestats/exam
 With [npm](https://npmjs.org) do:
 
 ```bash
-npm install @birbhouse-games/gamestats
+npm install @birbhouse/gamestats
 ```
 
 ## Usage
 
 ```js
-import { GameStats } from '@birbhouse-games/gamestats'
+import { GameStats } from '@birbhouse/gamestats'
 
 const stats = new GameStats()
 
@@ -105,8 +105,8 @@ const stats = new GameStats(config);
 
 
 
-[bundlephobia]: https://bundlephobia.com/result?p=@birbhouse-games/gamestats
-[bundlephobia-badge]: https://img.shields.io/bundlephobia/minzip/@birbhouse-games/gamestats.svg?style=flat-square
+[bundlephobia]: https://bundlephobia.com/result?p=@birbhouse/gamestats
+[bundlephobia-badge]: https://img.shields.io/bundlephobia/minzip/@birbhouse/gamestats.svg?style=flat-square
 [build-status]: https://github.com/birbhouse-games/gamestats/actions
 [build-status-badge]: https://img.shields.io/github/actions/workflow/status/birbhouse-games/gamestats/release.yml?style=flat-square
 [code-of-conduct]: CODE_OF_CONDUCT.md
@@ -115,17 +115,17 @@ const stats = new GameStats(config);
 [codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/birbhouse-games/gamestats.svg?style=flat-square
 [coveralls]: https://coveralls.io/github/birbhouse-games/gamestats
 [coveralls-badge]: https://img.shields.io/coveralls/birbhouse-games/gamestats.svg?style=flat-square
-[downloads-badge]: https://img.shields.io/npm/dm/@birbhouse-games/gamestats.svg?style=flat-square
+[downloads-badge]: https://img.shields.io/npm/dm/@birbhouse/gamestats.svg?style=flat-square
 [github-watch]: https://github.com/birbhouse-games/gamestats/watchers
 [github-watch-badge]: https://img.shields.io/github/watchers/birbhouse-games/gamestats.svg?style=social
 [github-star]: https://github.com/birbhouse-games/gamestats/stargazers
 [github-star-badge]: https://img.shields.io/github/stars/birbhouse-games/gamestats.svg?style=social
-[libraries.io]: https://libraries.io/npm/@birbhouse-games/gamestats
-[libraries.io-badge]: https://img.shields.io/librariesio/release/npm/@birbhouse-games/gamestats.svg?style=flat-square
+[libraries.io]: https://libraries.io/npm/@birbhouse/gamestats
+[libraries.io-badge]: https://img.shields.io/librariesio/release/npm/@birbhouse/gamestats.svg?style=flat-square
 [license]: LICENSE
-[license-badge]: https://img.shields.io/npm/l/@birbhouse-games/gamestats.svg?style=flat-square
-[npmtrends]: https://www.npmtrends.com/@birbhouse-games/gamestats
-[package]: https://npmjs.com/package/@birbhouse-games/gamestats
+[license-badge]: https://img.shields.io/npm/l/@birbhouse/gamestats.svg?style=flat-square
+[npmtrends]: https://www.npmtrends.com/@birbhouse/gamestats
+[package]: https://npmjs.com/package/@birbhouse/gamestats
 [prs]: CONTRIBUTING.md
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
-[version-badge]: https://img.shields.io/npm/v/@birbhouse-games/gamestats.svg?style=flat-square
+[version-badge]: https://img.shields.io/npm/v/@birbhouse/gamestats.svg?style=flat-square

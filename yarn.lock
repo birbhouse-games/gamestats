@@ -222,9 +222,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@birbhouse/gamestats.js@workspace:.":
+"@birbhouse/gamestats@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@birbhouse/gamestats.js@workspace:."
+  resolution: "@birbhouse/gamestats@workspace:."
   dependencies:
     "@birbhouse/eslint-config": "npm:^1.2.0"
     "@birbhouse/eslint-config-typescript": "npm:^1.1.0"

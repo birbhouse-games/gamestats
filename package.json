@@ -1,5 +1,5 @@
 {
-  "name": "@birbhouse/gamestats.js",
+  "name": "@birbhouse/gamestats",
   "version": "0.0.0-development",
   "description": "Javascript performance monitor / game stats library inspired by Unity's graphy",
   "type": "module",
