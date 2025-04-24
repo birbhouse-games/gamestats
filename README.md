@@ -1,4 +1,4 @@
-# `@birbhouse/gamestats`
+# `gamestats.js`
 
 > **Track performance stats in your game.**
 
@@ -34,13 +34,13 @@ For a live example click [here](https://birbhouse-games.github.io/gamestats/exam
 With [npm](https://npmjs.org) do:
 
 ```bash
-npm install @birbhouse/gamestats
+npm install gamestats.js
 ```
 
 ## Usage
 
 ```js
-import { GameStats } from '@birbhouse/gamestats'
+import { GameStats } from 'gamestats.js'
 
 const stats = new GameStats()
 
@@ -67,7 +67,7 @@ function animate() {
 
 requestAnimationFrame( animate )
 ```
-See also this code [example](https://github.com/birbhouse-games/gamestats/blob/main/example/index.html)
+See also this code [example](https://github.com/eriksom/gamestats/blob/main/example/index.html)
 
 **Optional configuration**
 
@@ -105,27 +105,27 @@ const stats = new GameStats(config);
 
 
 
-[bundlephobia]: https://bundlephobia.com/result?p=@birbhouse/gamestats
-[bundlephobia-badge]: https://img.shields.io/bundlephobia/minzip/@birbhouse/gamestats.svg?style=flat-square
-[build-status]: https://github.com/birbhouse-games/gamestats/actions
-[build-status-badge]: https://img.shields.io/github/actions/workflow/status/birbhouse-games/gamestats/release.yml?style=flat-square
+[bundlephobia]: https://bundlephobia.com/result?p=gamestats.js
+[bundlephobia-badge]: https://img.shields.io/bundlephobia/minzip/gamestats.js.svg?style=flat-square
+[build-status]: https://github.com/eriksom/gamestats/actions
+[build-status-badge]: https://img.shields.io/github/actions/workflow/status/eriksom/gamestats/release.yml?style=flat-square
 [code-of-conduct]: CODE_OF_CONDUCT.md
 [code-of-conduct-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
-[codeclimate]: https://codeclimate.com/github/birbhouse-games/gamestats
-[codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/birbhouse-games/gamestats.svg?style=flat-square
-[coveralls]: https://coveralls.io/github/birbhouse-games/gamestats
-[coveralls-badge]: https://img.shields.io/coveralls/birbhouse-games/gamestats.svg?style=flat-square
-[downloads-badge]: https://img.shields.io/npm/dm/@birbhouse/gamestats.svg?style=flat-square
-[github-watch]: https://github.com/birbhouse-games/gamestats/watchers
-[github-watch-badge]: https://img.shields.io/github/watchers/birbhouse-games/gamestats.svg?style=social
-[github-star]: https://github.com/birbhouse-games/gamestats/stargazers
-[github-star-badge]: https://img.shields.io/github/stars/birbhouse-games/gamestats.svg?style=social
-[libraries.io]: https://libraries.io/npm/@birbhouse/gamestats
-[libraries.io-badge]: https://img.shields.io/librariesio/release/npm/@birbhouse/gamestats.svg?style=flat-square
+[codeclimate]: https://codeclimate.com/github/eriksom/gamestats
+[codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/eriksom/gamestats.svg?style=flat-square
+[coveralls]: https://coveralls.io/github/eriksom/gamestats
+[coveralls-badge]: https://img.shields.io/coveralls/eriksom/gamestats.svg?style=flat-square
+[downloads-badge]: https://img.shields.io/npm/dm/gamestats.js.svg?style=flat-square
+[github-watch]: https://github.com/eriksom/gamestats/watchers
+[github-watch-badge]: https://img.shields.io/github/watchers/eriksom/gamestats.svg?style=social
+[github-star]: https://github.com/eriksom/gamestats/stargazers
+[github-star-badge]: https://img.shields.io/github/stars/eriksom/gamestats.svg?style=social
+[libraries.io]: https://libraries.io/npm/gamestats.js
+[libraries.io-badge]: https://img.shields.io/librariesio/release/npm/gamestats.js.svg?style=flat-square
 [license]: LICENSE
-[license-badge]: https://img.shields.io/npm/l/@birbhouse/gamestats.svg?style=flat-square
-[npmtrends]: https://www.npmtrends.com/@birbhouse/gamestats
-[package]: https://npmjs.com/package/@birbhouse/gamestats
+[license-badge]: https://img.shields.io/npm/l/gamestats.js.svg?style=flat-square
+[npmtrends]: https://www.npmtrends.com/gamestats.js
+[package]: https://npmjs.com/package/gamestats.js
 [prs]: CONTRIBUTING.md
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
-[version-badge]: https://img.shields.io/npm/v/@birbhouse/gamestats.svg?style=flat-square
+[version-badge]: https://img.shields.io/npm/v/gamestats.js.svg?style=flat-square

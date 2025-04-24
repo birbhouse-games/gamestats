@@ -1,5 +1,5 @@
 {
-  "name": "@birbhouse/gamestats",
+  "name": "gamestats.js",
   "version": "0.0.0-development",
   "description": "Javascript performance monitor / game stats library inspired by Unity's graphy",
   "type": "module",
@@ -58,9 +58,9 @@
     "performance",
     "fps"
   ],
-  "author": "Trezy <t@trezy.com> (https://trezy.codes)",
+  "author": "Erik Sombroek",
   "contributors": [
-    "Erik Sombroek"
+    "Trezy <t@trezy.com> (https://trezy.codes)"
   ],
   "license": "MIT",
   "bugs": {
