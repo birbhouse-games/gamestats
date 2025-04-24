@@ -32,6 +32,8 @@
     "lint:fix": "eslint --fix",
     "prepare": "husky install",
     "prerelease": "npm run build",
+    "test": "tsup && vitest run",
+    "test:watch": "vitest",
     "watch": "concurrently \"yarn run watch:typescript\" \"yarn run watch:server\"",
     "watch:typescript": "tsup --watch",
     "watch:server": "http-server ."
@@ -76,6 +78,7 @@
     "@types/eslint__eslintrc": "^2.1.2",
     "@typescript-eslint/eslint-plugin": "8.31.0",
     "@typescript-eslint/parser": "8.31.0",
+    "@vitest/coverage-istanbul": "^3.1.2",
     "concurrently": "^9.1.2",
     "esbuild": "^0.25.3",
     "esbuild-plugin-umd-wrapper": "^3.0.0",
@@ -95,7 +98,8 @@
     "terser": "^5.39.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.31.0"
+    "typescript-eslint": "^8.31.0",
+    "vitest": "^3.1.2"
   },
   "publishConfig": {
     "access": "public"
