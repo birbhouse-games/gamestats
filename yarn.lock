@@ -39,11 +39,6 @@ __metadata:
     tsup: "npm:^8.4.0"
     typescript: "npm:^5.8.3"
     typescript-eslint: "npm:^8.19.0"
-  peerDependencies:
-    pixi.js: ^8.0.0
-  peerDependenciesMeta:
-    pixi.js:
-      optional: true
   languageName: unknown
   linkType: soft
 
