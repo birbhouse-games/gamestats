@@ -19,7 +19,7 @@ const BASE_CONFIG = {
 		gamestats: 'src/index.ts',
 	},
 	globalName: 'GameStats',
-	outDir: 'build',
+	outDir: 'lib',
 	sourcemap: true,
 	splitting: false,
 }

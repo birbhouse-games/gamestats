@@ -3,27 +3,27 @@
   "version": "0.0.0-development",
   "description": "Javascript performance monitor / game stats library inspired by Unity's graphy",
   "type": "module",
-  "main": "build/gamestats.cjs",
-  "module": "build/gamestats.js",
-  "types": "build/gamestats.d.ts",
+  "main": "lib/gamestats.cjs",
+  "module": "lib/gamestats.js",
+  "types": "lib/gamestats.d.ts",
   "exports": {
     ".": {
       "import": {
-        "types": "./build/gamestats.d.ts",
-        "default": "./build/gamestats.js"
+        "types": "./lib/gamestats.d.ts",
+        "default": "./lib/gamestats.js"
       },
       "require": {
-        "types": "./build/gamestats.d.ts",
-        "default": "./build/gamestats.cjs"
+        "types": "./lib/gamestats.d.ts",
+        "default": "./lib/gamestats.cjs"
       },
       "default": {
-        "types": "./build/gamestats.d.ts",
-        "default": "./build/gamestats.browser.js"
+        "types": "./lib/gamestats.d.ts",
+        "default": "./lib/gamestats.browser.js"
       }
     }
   },
   "files": [
-    "build",
+    "lib",
     "types"
   ],
   "scripts": {
