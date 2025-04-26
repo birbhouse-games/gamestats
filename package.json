@@ -30,23 +30,11 @@
     "build": "tsup",
     "lint": "eslint --config ./eslint.config.js",
     "lint:fix": "eslint --fix",
-    "prepare": "husky install",
-    "prerelease": "npm run build",
     "test": "tsup && vitest run",
     "test:watch": "vitest",
     "watch": "concurrently \"yarn run watch:typescript\" \"yarn run watch:server\"",
     "watch:typescript": "tsup --watch",
     "watch:server": "http-server ."
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{ts,js,mjs}": [
-      "eslint --cache --fix --max-warnings 0"
-    ]
   },
   "repository": {
     "type": "git",
@@ -94,7 +82,6 @@
     "eslint-plugin-unused-imports": "^4.1.4",
     "globals": "^15.15.0",
     "http-server": "^0.12.3",
-    "husky": "^9.1.7",
     "terser": "^5.39.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.3",
